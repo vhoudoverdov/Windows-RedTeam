@@ -8,8 +8,8 @@
     New-RandomDate
 #> 
 Function New-RandomDate {
-$Ceiling = Get-Date -Year 2100 -Month 12 -Date 31
-$Floor = Get-Date -Year 1980 -Month 12 -Date 31
+$Ceiling = Get-Date -Year 2020 -Month 12 -Date 31
+$Floor = Get-Date -Year 2000 -Month 12 -Date 31
 Return $(New-Object DateTime($(Get-Random -Max $Ceiling.Ticks -Min $Floor.Ticks))).ToUniversalTime()
 }
 
@@ -25,33 +25,38 @@ Return $(New-Object DateTime($(Get-Random -Max $Ceiling.Ticks -Min $Floor.Ticks)
 #> 
 
 Function Timestomp-Files {
-Param([string]$Path,[Datetime]$TargetDate)
-
+Param([string]$Path,
+      [Datetime]$TargetDate,
+      [Switch]$Modified,
+      [Switch]$Accessed,
+      [Switch]$Created
+     )
 
 if($TargetDate -eq $NULL) {
 
 if ($Path -isnot [System.IO.DirectoryInfo]){  
-$(Get-Item $Path).LastAccessTime = $(New-RandomDate)
+if($Modified)
+{
 $(Get-Item $Path).LastWriteTime = $(New-RandomDate)
-$(Get-Item $Path).LastAccessTimeUTC = $(New-RandomDate)
 $(Get-Item $Path).LastWriteTimeUTC = $(New-RandomDate)
+}
+
+if($Accessed)
+{
+$(Get-Item $Path).LastAccessTime = $(New-RandomDate)
+$(Get-Item $Path).LastAccessTimeUTC = $(New-RandomDate)
+}
+
+if($Created)
+{
 $(Get-Item $Path).CreationTime = $(New-RandomDate)
 $(Get-Item $Path).CreationTimeUTC = $(New-RandomDate)}
+}
 
 else
 {  
 if(!$(Test-Path $Path)){throw "The specified path wasn't found:  $Path"}
 if(!$(Test-Path "$Path\*")){throw "The specified path was empty:  $Path"}
-
-
-Get-ChildItem $Path | % {
-$_.LastAccessTime = $(New-RandomDate)
-$_.LastWriteTime = $(New-RandomDate)
-$_.LastAccessTimeUTC = $(New-RandomDate)
-$_.LastWriteTimeUTC = $(New-RandomDate)
-$_.CreationTime = $(New-RandomDate)
-$_.CreationTimeUTC = $(New-RandomDate)
-}
 }
 }
 
@@ -59,27 +64,30 @@ else
 {
     if ($Path -isnot [System.IO.DirectoryInfo])
     {  
-        $(Get-Item $Path).LastAccessTime = $TargetDate
-        $(Get-Item $Path).LastWriteTime = $TargetDate
-        $(Get-Item $Path).LastAccessTimeUTC = $TargetDate
-        $(Get-Item $Path).LastWriteTimeUTC = $TargetDate
-        $(Get-Item $Path).CreationTime = $TargetDate
-        $(Get-Item $Path).CreationTimeUTC = $TargetDate
-    }
+        if($Modified)
+        {
+            $(Get-Item $Path).LastWriteTime = $TargetDate
+            $(Get-Item $Path).LastWriteTimeUTC = $TargetDate
+        }
+
+    if($Accessed)
+        {
+            $(Get-Item $Path).LastAccessTime = $TargetDate
+            $(Get-Item $Path).LastAccessTimeUTC = $TargetDate
+        }
+
+    if($Created)
+        {
+            $(Get-Item $Path).CreationTime = $TargetDate
+            $(Get-Item $Path).CreationTimeUTC = $TargetDate
+        }
+}
 
     else
     {
         if(!$(Test-Path $Path)){throw "The specified path wasn't found:  $Path"}
         if(!$(Test-Path "$Path\*")){throw "The specified path was empty:  $Path"}
 
-        Get-ChildItem $Path | % {
-        $_.LastAccessTime = $TargetDate
-        $_.LastWriteTime = $TargetDate
-        $_.LastAccessTimeUTC = $TargetDate
-        $_.LastWriteTimeUTC = $TargetDate
-        $_.CreationTime = $TargetDate
-        $_.CreationTimeUTC = $TargetDate
-                            }
     }
 }
 }
