@@ -1,11 +1,12 @@
 # ClobberTime PoSh
 
 ## Table of Contents
-
+* [Intro](#intro)
 * [Supported Operations](#operations)
 * [Demo](#demo)
 * [Example Use Cases](#use-cases)
 
+### <a name="intro"></a>Intro
 ClobberTime PoSH is a graphical frontend that provides functionality for manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp module located in https://github.com/vhoudoverdov/Security-Utils/
 
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
