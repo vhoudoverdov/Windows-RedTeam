@@ -1,10 +1,16 @@
 # ClobberTime PoSh
 
-Graphical frontend that provides functionality for manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp module located in https://github.com/vhoudoverdov/Security-Utils/
+## Table of Contents
+
+* [Supported Operations](#operations)
+* [Demo](#demo)
+* [Example Use Cases](#use-cases)
+
+ClobberTime PoSH is a graphical frontend that provides functionality for manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp module located in https://github.com/vhoudoverdov/Security-Utils/
 
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
 
-### Supported Operations
+### <a name="operations"></a>Supported Operations
 #### Timestomp one or more files with a single random date
 This operation will generate one random DateTime object, and stomp all MAC properties of each target file with this date.
 
@@ -19,7 +25,7 @@ Vasken Houdoverdov
 
 github.com/vhoudoverdov
 
-## Demo
+### <a name="demo"></a>Demo
 ###### Timestomp MAC properties of a single file with a random date
 
 ![](demo/demo-single-file-single-date.gif)
@@ -33,7 +39,7 @@ github.com/vhoudoverdov
 ![](demo/demo-single-file-specific-date.gif)
 
 
-### Example Use Cases
+### <a name="use-cases"></a>Example Use Cases
 Timestamp manipulation in Windows can be used in a variety of educational use cases:
 ### Demonstrating the relationship between userland timestamps and MFT timstamps
 Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes $STANDARD_INFORMATION and $FILE_NAME.  Typically, utilities that timstomp files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the $STANDARD_INFORMATION attribute, since the $FILE_NAME attribute is typically only kernel-accessible.  
