@@ -13,13 +13,13 @@ This utility can be wrapped in a binary (exe) and signed with a forged software-
 
 ### <a name="operations"></a>Supported Operations
 #### Timestomp one or more files with a single random date
-This operation will generate one random DateTime object, and stomp all MAC properties of each target file with this date.
+This operation will generate one random DateTime object, and stomp each selected MAC property of each target file with this date.
 
 #### Timestomp one or more files with multiple random dates
-This operation will generate multiple new random DateTime objects, one for each MAC property of each target file.  The result of this operation is that each individual MAC property of each target file will have a uniquely-generated random date.
+This operation will generate multiple new random DateTime objects, one for each selected MAC property of each target file.  The result of this operation is that each selected MAC property of each target file will have a uniquely-generated random date.
 
 #### Timestomp one or more files with a specified date
-This operation will ask the user to specify a date using an on-screen calendar, them timestomp the MAC properties of each target file with the specified date.
+This operation will ask the user to specify a date using an on-screen calendar, them timestomp the selected MAC properties of each target file with the specified date.
 
 #### Author
 Vasken Houdoverdov
@@ -50,4 +50,4 @@ The consequence of this is that there will be a discrepancy between the timestam
 A typical Windows Red Team engagement may involve dropping one or more files onto a target host for persistence.  Manipulation of the userland timestamps of these files may allow them to look like an expected component of the directory they are embedded in.
 
 ### Software Development Testing
-Any number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps.
+A number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps.
