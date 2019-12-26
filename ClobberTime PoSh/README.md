@@ -32,7 +32,7 @@ Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamp
 | **$STANDARD_INFORMATION** | Accessible to standard Windows API libraries, and can be modified by user-level processes. |
 | **$FILE_NAME** | Kernel-accessible. 
 
-Typically, utilities that 'timestomp' files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the $STANDARD_INFORMATION attribute, since the $FILE_NAME attribute is typically only kernel-accessible.  The consequence of this is that there will be a discrepancy between the timestamps stored in each of the two attributes, indicating that timestamp manipulation may have occurred.
+Typically, utilities that 'timestomp' files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the **$STANDARD_INFORMATION** attribute, since the **$FILE_NAME** attribute is typically only kernel-accessible.  The consequence of this is that there will be a discrepancy between the timestamps stored in each of the two attributes, indicating that timestamp manipulation may have occurred.
 
 #### Disguising WebShells or backdoors during Red Team engagements
 A typical Windows Red Team engagement may involve dropping one or more files onto a target host for persistence.  Manipulation of the userland timestamps of these files may allow them to superficially resemble an expected component of the directory they are embedded in.
