@@ -35,7 +35,7 @@ github.com/vhoudoverdov
 
 ![](demo/demo-multiple-files-multiple-dates.gif)
 
-###### Timestomp MAC properties of a single file with a specified date. Some entropy (<8600 seconds of time) is added to the selected date as part of this operation.
+###### Timestomp MAC properties of a single file with a specified date. 
 
 ![](demo/demo-single-file-specific-date.gif)
 
@@ -49,5 +49,5 @@ The consequence of this is that there will be a discrepancy between the timestam
 ### Disguising WebShells or backdoors during Red Team engagements
 A typical Windows Red Team engagement may involve dropping one or more files onto a target host for persistence.  Manipulation of the userland timestamps of these files may allow them to look like an expected component of the directory they are embedded in.
 
-### Software Development Testing
-A number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps.
+### Software Engineering Test Cases
+A number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps acorss one or more files.
