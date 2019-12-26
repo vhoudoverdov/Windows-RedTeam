@@ -13,6 +13,7 @@ This utility can be wrapped in a binary (exe) and signed with a forged software-
 
 #### Author
 Vasken Houdoverdov
+
 github.com/vhoudoverdov
 
 ### <a name="operations"></a>Supported Operations
