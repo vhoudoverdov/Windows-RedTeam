@@ -25,7 +25,7 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 ### <a name="use-cases"></a>Example Use Cases
 Timestamp manipulation in Windows can be used in a variety of educational use cases:
 #### Demonstrating the relationship between userland timestamps and timestamps in the MFT
-Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes $STANDARD_INFORMATION and $FILE_NAME.  
+Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes **$STANDARD_INFORMATION** and **$FILE_NAME**.  
 
 | Attribute | Description |
 | --- | --- |
