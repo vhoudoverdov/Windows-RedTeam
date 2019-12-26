@@ -36,7 +36,7 @@ The consequence of this is that there will be a discrepancy between the timestam
 A typical Windows Red Team engagement may involve dropping one or more files onto a target host for persistence.  Manipulation of the userland timestamps of these files may allow them to look like an expected component of the directory they are embedded in.
 
 ### Software Engineering Test Cases
-A number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps acorss one or more files.
+A number of use cases in software development that rely on timestamp validation can be facilitated using a tool that allows for the setting of arbitrary timestamps across one or more files.
 
 ### <a name="demo"></a>Demo
 ###### Timestomp MAC properties of a single file with a random date
