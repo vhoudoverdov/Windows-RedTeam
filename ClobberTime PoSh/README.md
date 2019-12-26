@@ -11,6 +11,9 @@ ClobberTime PoSH is a graphical frontend that provides functionality for manipul
 
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
 
+#### Author
+Vasken Houdoverdov
+
 ### <a name="operations"></a>Supported Operations
 #### Timestomp one or more files with a single random date
 This operation will generate one random DateTime object, and stomp each selected MAC property of each target file with this date.
@@ -20,9 +23,6 @@ This operation will generate multiple new random DateTime objects, one for each 
 
 #### Timestomp one or more files with a specified date
 This operation will ask the user to specify a date using an on-screen calendar, them timestomp the selected MAC properties of each target file with the specified date.
-
-#### Author
-Vasken Houdoverdov
 
 github.com/vhoudoverdov
 
