@@ -13,6 +13,7 @@ This utility can be wrapped in a binary (exe) and signed with a forged software-
 
 #### Author
 Vasken Houdoverdov
+github.com/vhoudoverdov
 
 ### <a name="operations"></a>Supported Operations
 #### Timestomp one or more files with a single random date
@@ -23,8 +24,6 @@ This operation will generate multiple new random DateTime objects, one for each 
 
 #### Timestomp one or more files with a specified date
 This operation will ask the user to specify a date using an on-screen calendar, them timestomp the selected MAC properties of each target file with the specified date.
-
-github.com/vhoudoverdov
 
 ### <a name="use-cases"></a>Example Use Cases
 Timestamp manipulation in Windows can be used in a variety of educational use cases:
