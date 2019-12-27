@@ -58,7 +58,7 @@ If timestamps are modified in userland, it is necessary to refer to the **$FILE_
 
 A number of mechanisms exist that allow the **$FILE_NAME** attribute for a given file to be queried directly from the MFT.  One such module is the [PowerForensics module](https://github.com/Invoke-IR/PowerForensics) for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
 
-####Scenario
+##### Scenario
 Suppose a persistence mechanism (webshell) has been dropped on the local system at C:\temp\sample.html.  The MAC timestamps of this file were modified in userland by the adversary to match the dates of other files in the directory (in this case, February 2009), but were actually planted into the filesystem in December 2019.
 
 Loading the PowerForensics module and querying for the **$FILE_NAME** attribute reveals the timestamp discrepancy:
