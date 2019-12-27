@@ -7,7 +7,9 @@
 * [Demo](#demo)
 * [Forensic Analysis and Detection](#forensics)
 ### <a name="intro"></a>Intro
-ClobberTime is a graphical frontend that provides functionality for the manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp-Utils module located in https://github.com/vhoudoverdov/Security-Utils/
+ClobberTime is a graphical frontend that provides functionality for the manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  It is also designed as an education tool to demonstrate the difference between userland timestamps (which can be easily manipulated) and timestamps recorded in the filesystem MFT.
+
+Extends the functionality of the Timestomp-Utils module located in https://github.com/vhoudoverdov/Security-Utils/
 
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
 
@@ -56,16 +58,11 @@ If timestamps are modified in userland, it is necessary to refer to the **$FILE_
 
 A number of mechanisms exist that allow the **$FILE_NAME** attribute for a given file to be queried directly from the MFT.  One such module is the [PowerForensics module](https://github.com/Invoke-IR/PowerForensics) for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
 
-Suppose a persistence mechanism (webshell) has been dropped on the local system at C:\temp\sample.html.  The MAC timestamps of this file were modified in userland by the adversary to match the dates of other files in the directory (in this case, February 2009), but were actually planted into the filesystem in December 2019.
+##### Scenario
+Suppose a persistence mechanism (webshell) has been dropped on the local system at C:\www\sample.html.  The MAC timestamps of this file were modified in userland by the adversary to match the dates of other files in the directory (in this case, February 2009), but were actually planted into the filesystem in December 2019.
 
 Loading the PowerForensics module and querying for the **$FILE_NAME** attribute reveals the timestamp discrepancy:
 ```
-> Get-Location
-
-Path
-----
-C:\temp
-
 > Import-Module .\PowerForensics-master\Modules\PowerForensics\PowerForensics.psm1
 > Get-Command -Module PowerForensics *FileRecord*
 
@@ -75,7 +72,7 @@ Function        Get-ForensicFileRecord                             0.0        Po
 Function        Get-ForensicFileRecordIndex                        0.0        PowerForensics
 
 
-> (Get-ForensicFileRecord C:\temp\sample.html).Attribute
+> (Get-ForensicFileRecord C:\www\sample.html).Attribute
 
 
 BornTime             : 2/13/2009 8:31:17 PM
