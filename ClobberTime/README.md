@@ -63,12 +63,6 @@ Suppose a persistence mechanism (webshell) has been dropped on the local system 
 
 Loading the PowerForensics module and querying for the **$FILE_NAME** attribute reveals the timestamp discrepancy:
 ```
-> Get-Location
-
-Path
-----
-C:\www
-
 > Import-Module .\PowerForensics-master\Modules\PowerForensics\PowerForensics.psm1
 > Get-Command -Module PowerForensics *FileRecord*
 
