@@ -20,7 +20,7 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 | --- | --- |
 | **'Timestomp' target file(s) with a single random date** | This operation will generate a single random DateTime object and set each selected MAC property of each target file to this date. |
 | **'Timestomp' target file(s) with multiple random dates** | This operation will generate multiple new random DateTime objects, one for each selected MAC property of each target file.  The result of this operation is that each selected MAC property of each target file will be set to a random date. 
- | **'Timestomp' target file(s) with a specified date** | This operation will ask the user to specify a datetime using an on-screen calendar, them timestomp the selected MAC properties of each target file with the specified date.|
+ | **'Timestomp' target file(s) with a specified date** | This operation will ask the user to specify a datetime using an on-screen calendar, then set each selected MAC property of each target file to the specified date.|
 
 ### <a name="use-cases"></a>Example Use Cases
 Timestamp manipulation in Windows can be used in a variety of educational use cases:
@@ -52,13 +52,13 @@ A number of use cases in software development that rely on timestamp validation 
 ![](demo/demo-single-file-specific-date.gif)
 
 ### <a name="forensics"></a>Forensic Analysis and Detection
-If timestamps are modified in userland, it is necessary to refer to the $FILE_NAME attribute for a given file in order to obtain accurate timestamp information for the purposes of sound forensic analysis.
+If timestamps are modified in userland, it is necessary to refer to the **$FILE_NAME** attribute in the filesystem Master File Table (MFT) in order to obtain accurate timestamp information for the purposes of sound forensic analysis.
 
-A number of mechanisms exist that allow the $FILE_NAME attribute to be queried directly from the MFT.  One such module is the PowerForensics module for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
+A number of mechanisms exist that allow the **$FILE_NAME** attribute for a given file to be queried directly from the MFT.  One such module is the PowerForensics module for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
 
-Suppose a webshell has been found on the local system at C:\temp\sample.html.  The MAC timestamps of this webshell file have been modified in userland to match the dates of other files in the directory (February 2009), but were actually implanted into the directory on December 2019.
+Suppose a persistence mechanism (webshell) has been dropped on the local system at C:\temp\sample.html.  The MAC timestamps of this file were modified in userland by the adversary to match the dates of other files in the directory (in this case, February 2009), but were actually planted into the filesystem in December 2019.
 
-Loading the PowerForensics module and querying for the $FILE_NAME attribute reveals the timestamp discrepancy:
+Loading the PowerForensics module and querying for the **$FILE_NAME** attribute reveals the timestamp discrepancy:
 ```
 > Get-Location
 
