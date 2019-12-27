@@ -56,7 +56,7 @@ If timestamps are modified in userland, it is necessary to refer to the $FILE_NA
 
 A number of mechanisms exist that allow the $FILE_NAME attribute to be queried directly from the MFT.  One such module is the PowerForensics module for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
 
-Suppose a webshell has been found on the local system at C:\temp\sample.html.  The MAC timestamps of this webshell file have been modified in userland to match the dates of other files in the directory.
+Suppose a webshell has been found on the local system at C:\temp\sample.html.  The MAC timestamps of this webshell file have been modified in userland to match the dates of other files in the directory (February 2009), but were actually implanted into the directory on December 2019.
 
 Loading the PowerForensics module and querying for the $FILE_NAME attribute reveals the timestamp discrepancy:
 ```
