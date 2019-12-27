@@ -5,7 +5,7 @@
 * [Supported Operations](#operations)
 * [Example Use Cases](#use-cases)
 * [Demo](#demo)
-
+* [Forensic Analysis and Detection](#forensics)
 ### <a name="intro"></a>Intro
 ClobberTime is a graphical frontend that provides functionality for the manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp-Utils module located in https://github.com/vhoudoverdov/Security-Utils/
 
@@ -50,3 +50,63 @@ A number of use cases in software development that rely on timestamp validation 
 ###### Timestomp MAC properties of a single file with a specified date. 
 
 ![](demo/demo-single-file-specific-date.gif)
+
+### <a name="forensics"></a>Forensic Analysis and Detection
+If timestamps are modified in userland, it is necessary to refer to the $FILE_NAME attribute for a given file in order to obtain accurate timestamp information for the purposes of sound forensic analysis.
+
+A number of mechanisms exist that allow the $FILE_NAME attribute to be queried directly from the MFT.  One such module is the PowerForensics module for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
+
+Suppose a webshell has been found on the local system at C:\temp\sample.html.  The MAC timestamps of this webshell file have been modified in userland to match the dates of other files in the directory.
+
+Loading the PowerForensics module and querying for the $FILE_NAME attribute reveals the timestamp discrepancy:
+```
+> Get-Location
+
+Path
+----
+C:\temp
+
+> Import-Module .\PowerForensics-master\Modules\PowerForensics\PowerForensics.psm1
+> Get-Command -Module PowerForensics *FileRecord*
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Get-ForensicFileRecord                             0.0        PowerForensics
+Function        Get-ForensicFileRecordIndex                        0.0        PowerForensics
+
+
+> (Get-ForensicFileRecord C:\temp\sample.html).Attribute
+
+
+BornTime             : 2/13/2009 8:31:17 PM
+ModifiedTime         : 2/13/2009 8:31:17 PM
+ChangedTime          : 12/27/2019 2:59:04 AM
+AccessedTime         : 2/13/2009 8:31:17 PM
+Permission           : ARCHIVE
+MaxVersionNumber     : 0
+VersionNumber        : 0
+ClassId              : 0
+OwnerId              : 0
+SecurityId           : 2617
+QuotaCharged         : 0
+UpdateSequenceNumber : 3749119560
+Name                 : STANDARD_INFORMATION
+NameString           :
+AttributeId          : 0
+
+Filename             : sample.html
+ParentSequenceNumber : 10
+ParentRecordNumber   : 126390
+Namespace            : 1
+AllocatedSize        : 1089536
+RealSize             : 1089217
+Flags                : 32
+ER                   : 0
+ModifiedTime         : 12/27/2019 2:44:50 AM
+AccessedTime         : 12/22/2019 6:30:05 AM
+ChangedTime          : 12/22/2019 6:31:48 AM
+BornTime             : 12/22/2019 6:14:37 AM
+Name                 : FILE_NAME
+NameString           :
+AttributeId          : 9
+```
