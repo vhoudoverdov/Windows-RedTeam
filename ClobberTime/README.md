@@ -7,7 +7,8 @@
 * [Demo](#demo)
 * [Forensic Analysis and Detection](#forensics)
 ### <a name="intro"></a>Intro
-ClobberTime is a graphical frontend that provides functionality for the manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  Extends the functionality of the Timestomp-Utils module located in https://github.com/vhoudoverdov/Security-Utils/
+ClobberTime is a graphical frontend that provides functionality for the manipulation of MAC (Modified, Accessed, Created) timestamps during Windows Red Team or Pentesting engagements, without modifying current system time and without invoking the traditional timestomp binary.  It is also designed as an education tool to demonstrate the difference between userland timestamps (which can be easily manipulated) and timestamps recorded in the filesystem MFT. 
+Extends the functionality of the Timestomp-Utils module located in https://github.com/vhoudoverdov/Security-Utils/
 
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
 
