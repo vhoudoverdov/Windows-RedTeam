@@ -27,10 +27,8 @@ Timestamp manipulation in Windows can be used in a variety of educational use ca
 #### Demonstrating the relationship between userland timestamps and timestamps in the MFT
 Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes **$STANDARD_INFORMATION** and **$FILE_NAME**.  
 
-| Attribute | Description |
-| --- | --- |
-| **$STANDARD_INFORMATION** | Accessible to standard Windows API libraries, and can be modified by user-level processes. |
-| **$FILE_NAME** | Kernel-accessible. 
+**$STANDARD_INFORMATION** - Accessible to standard Windows API libraries, and can be modified by user-level processes. 
+**$FILE_NAME** - Kernel-accessible. 
 
 Typically, utilities that 'timestomp' files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the **$STANDARD_INFORMATION** attribute, since the **$FILE_NAME** attribute is typically only kernel-accessible.  The consequence of this is that there will be a discrepancy between the timestamps stored in each of the two attributes, indicating that timestamp manipulation may have occurred.
 
