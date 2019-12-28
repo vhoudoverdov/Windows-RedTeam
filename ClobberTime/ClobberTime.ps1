@@ -24,8 +24,7 @@ $Form.text  = "ClobberTime PowerShell for Windows Red Team"
 $Form.TopMost   = $True
 $Form.FormBorderStyle = 'Fixed3D'
 
-$FormIcon = New-Object System.Drawing.Icon (".\icon.ico")
-$Form.Icon = $FormIcon
+$Form.Icon = $(New-Object System.Drawing.Icon (".\icon.ico"))
 
 $DateTypeGroupBox   = New-Object system.Windows.Forms.Groupbox
 $DateTypeGroupBox.height    = 121
@@ -40,10 +39,11 @@ $RandomDateRadioButton.width    = 104
 $RandomDateRadioButton.height   = 20
 $RandomDateRadioButton.location = New-Object System.Drawing.Point(14,20)
 $RandomDateRadioButton.Font = 'Microsoft Sans Serif,10'
+$RandomDateRadioButton.Checked = $True
 $RandomDateRadioButtonTooltip   = New-Object system.Windows.Forms.ToolTip
 $RandomDateRadioButtonTooltip.ToolTipTitle  = "Generate a single random date"
 $RandomDateRadioButtonTooltip.isBalloon = $false
-$RandomDateRadioButtonTooltip.SetToolTip($RandomDateRadioButton,'Generate a single random datetime object, then timestomp each targets with this datetime.')
+$RandomDateRadioButtonTooltip.SetToolTip($RandomDateRadioButton,'This operation will generate a single random DateTime object and set each selected MAC property of each target file to this date.')
 
 $RandomDatesRadioButton          = New-Object system.Windows.Forms.RadioButton
 $RandomDatesRadioButton.text     = "Random Dates"
@@ -55,7 +55,7 @@ $RandomDatesRadioButton.Font     = 'Microsoft Sans Serif,10'
 $RandomDatesRadioButtonTooltip  = New-Object system.Windows.Forms.ToolTip
 $RandomDatesRadioButtonTooltip.ToolTipTitle = "Generate multiple random dates"
 $RandomDatesRadioButtonTooltip.isBalloon    = $false
-$RandomDatesRadioButtonTooltip.SetToolTip($RandomDatesRadioButton,"Generate a new random datetime object for each target, then timestomp each target with the corresponding datetime value.")
+$RandomDatesRadioButtonTooltip.SetToolTip($RandomDatesRadioButton,"This operation will generate multiple new random DateTime objects, one for each selected MAC property of each target file. The result of this operation is that each selected MAC property of each target file will be set to a random date.")
 
 $DateSelectionRadioButton   = New-Object system.Windows.Forms.RadioButton
 $DateSelectionRadioButton.text  = "Pick Date..."
@@ -67,7 +67,7 @@ $DateSelectionRadioButton.Font   = 'Microsoft Sans Serif,10'
 $DateSelectionRadioButtonTooltip    = New-Object system.Windows.Forms.ToolTip
 $DateSelectionRadioButtonTooltip.ToolTipTitle   = "Pick a specific date"
 $DateSelectionRadioButtonTooltip.isBalloon  = $false
-$DateSelectionRadioButtonTooltip.SetToolTip($DateSelectionRadioButton,'Pick a specific date, then timestomp each target with this datetime.  Some entropy will be added to the time of this date for randomness.')
+$DateSelectionRadioButtonTooltip.SetToolTip($DateSelectionRadioButton,'This operation will ask the user to specify a datetime using an on-screen calendar, then set each selected MAC property of each target file to the specified date.')
 
 $PathDescriptorTextBox  = New-Object system.Windows.Forms.TextBox
 $PathDescriptorTextBox.multiline = $true
@@ -165,17 +165,17 @@ $DateSelectionRadioButton.Add_Click(
     $TimeInputTextBox   = New-Object system.Windows.Forms.TextBox
     $TimeInputTextBox.multiline = $true
     $TimeInputTextBox.text  = "00:00:00"
-    $TimeInputTextBox.width = 80
+    $TimeInputTextBox.width = 70
     $TimeInputTextBox.height    = 30
-    $TimeInputTextBox.location  = New-Object System.Drawing.Point(115,170)
-    $TimeInputTextBox.Font  = 'Microsoft Sans Serif,14'
+    $TimeInputTextBox.location  = New-Object System.Drawing.Point(80,165)
+    $TimeInputTextBox.Font  = 'Microsoft Sans Serif,12'
     $TimeInputTextBox.MaxLength = 8;
 
     $TimeStampLabel1,$TimeStampLabel2,$TimeStampLabel3 | % {$_.Text = ""}
     $CalendarForm = New-Object Windows.Forms.Form -Property @{
         StartPosition = [Windows.Forms.FormStartPosition]::CenterScreen
-        Size          = New-Object Drawing.Size 320, 280
-        Text          = 'Select a Date'
+        Size          = New-Object Drawing.Size 238, 268
+        Text          = 'Calendar'
         Topmost       = $true
         FormBorderStyle = 'Fixed3D'
 }
@@ -188,7 +188,7 @@ $DateSelectionRadioButton.Add_Click(
 
     $OKButton = New-Object Windows.Forms.Button -Property @{
         Location     = New-Object Drawing.Point 0, 200
-        Size         = New-Object Drawing.Size 95, 43
+        Size         = New-Object Drawing.Size 75, 33
         Text         = 'OK'
         DialogResult = [Windows.Forms.DialogResult]::OK}
 
@@ -196,8 +196,8 @@ $DateSelectionRadioButton.Add_Click(
     $CalendarForm.Controls.Add($OKButton)
 
     $CancelButton = New-Object Windows.Forms.Button -Property @{
-        Location     = New-Object Drawing.Point 215, 200
-        Size         = New-Object Drawing.Size 95, 43
+        Location     = New-Object Drawing.Point 152, 200
+        Size         = New-Object Drawing.Size 75, 33
         Text         = 'Cancel'
         DialogResult = [Windows.Forms.DialogResult]::Cancel}
 
@@ -239,8 +239,7 @@ $TimestompButton.Add_Click(
             $FileBrowser.FileNames | % {   
                 if(![System.IO.File]::Exists($_)) 
                 {
-                    [System.Windows.MessageBox]::Show('One or more target items are not valid paths.')
-                    break;
+                    [System.Windows.MessageBox]::Show("The specified path doesn't exist:  $_")
                 }
                 else
                 {
