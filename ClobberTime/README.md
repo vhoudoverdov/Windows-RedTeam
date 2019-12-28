@@ -27,13 +27,12 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 ### <a name="use-cases"></a>Example Use Cases
 Timestamp manipulation in Windows can be used in a variety of educational use cases:
 #### Demonstrating the relationship between userland timestamps and timestamps in the MFT
-Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes *$STANDARD_INFORMATION* and *$FILE_NAME*.  
+Modern Windows filesystem implementations (NTFS) store two 'groups' of timestamps for each filesystem object.  The two groups of timestamps are stored in the attributes **$STANDARD_INFORMATION** and **$FILE_NAME**.  
 
-*$STANDARD_INFORMATION* - Accessible to standard Windows API libraries, and can be modified by user-level processes. 
+**$STANDARD_INFORMATION** - Accessible to standard Windows API libraries, and can be modified by user-level processes. 
+**$FILE_NAME** - Kernel-accessible. 
 
-*$FILE_NAME* - Kernel-accessible. 
-
-Typically, utilities that 'timestomp' files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the *$STANDARD_INFORMATION* attribute, since the *$FILE_NAME* attribute is typically only kernel-accessible.  The consequence of this is that there will be a discrepancy between the timestamps stored in each of the two attributes, indicating that timestamp manipulation may have occurred.
+Typically, utilities that 'timestomp' files in user space (like ClobberTime PoSH or the traditional timestomp binary), will only manipulate the timestamps stored in the **$STANDARD_INFORMATION** attribute, since the **$FILE_NAME** attribute is typically only kernel-accessible.  The consequence of this is that there will be a discrepancy between the timestamps stored in each of the two attributes, indicating that timestamp manipulation may have occurred.
 
 #### Disguising WebShells or backdoors during Red Team engagements
 A typical Windows Red Team engagement may involve dropping one or more files onto a target host for [persistence](https://attack.mitre.org/tactics/TA0003/).  Manipulation of the userland timestamps of these files may allow them to superficially resemble an expected component of the directory they are embedded in.
@@ -55,14 +54,14 @@ A number of use cases in software development that rely on timestamp validation 
 ![](demo/demo-single-file-specific-date.gif)
 
 ### <a name="forensics"></a>Forensic Analysis and Detection
-If timestamps are modified in userland, it is necessary to refer to the *$FILE_NAME* attribute in the filesystem Master File Table (MFT) in order to obtain accurate timestamp information for the purposes of sound forensic analysis.
+If timestamps are modified in userland, it is necessary to refer to the **$FILE_NAME** attribute in the filesystem Master File Table (MFT) in order to obtain accurate timestamp information for the purposes of sound forensic analysis.
 
-A number of mechanisms exist that allow the *$FILE_NAME* attribute for a given file to be queried directly from the MFT.  One such module is the [PowerForensics module](https://github.com/Invoke-IR/PowerForensics) for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
+A number of mechanisms exist that allow the **$FILE_NAME** attribute for a given file to be queried directly from the MFT.  One such module is the [PowerForensics module](https://github.com/Invoke-IR/PowerForensics) for PowerShell.  A demonstration of using this module to return timstamps stored in the MFT is presented here.
 
 ##### Scenario
 Suppose a persistence mechanism (webshell) has been dropped on the local system at C:\www\sample.html.  The MAC timestamps of this file were modified in userland by the adversary to match the dates of other files in the directory (in this case, February 2009), but were actually planted into the filesystem in December 2019.
 
-Loading the PowerForensics module and querying for the *$FILE_NAME* attribute reveals the timestamp discrepancy:
+Loading the PowerForensics module and querying for the **$FILE_NAME** attribute reveals the timestamp discrepancy:
 ```
 > Import-Module .\PowerForensics-master\Modules\PowerForensics\PowerForensics.psm1
 > Get-Command -Module PowerForensics *FileRecord*
