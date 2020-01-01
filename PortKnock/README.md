@@ -8,8 +8,9 @@
 
 ### <a name="intro"></a>Intro
 PortKnock-Utils is a PowerShell interface for performing port-knock operations during Windows Red Team and Pentesting engagements.
+
 This tool was designed specifically to provide a port knocking utility that allows source ports to be specified as part of the port-knock operation.
-It was also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
+It was also designed as an educational tool for understanding advanced persistence mechanisms used by threat actors and malware.
 
 #####  Author
 Vasken Houdoverdov  - github.com/vhoudoverdov
