@@ -12,6 +12,11 @@ Graphical frontend that provides functionality for manipulation of MAC (Modified
 This utility can be wrapped in a binary (exe) and signed with a forged software-signing certificate for additional evasion.
 
 ### PortKnock
-PowerShell interface for performing port-knock operations during Windows Red Team and Pentesting engagements. 
+PowerShell interface for performing port-knock operations during Windows Red Team and Pentesting engagements.
 
 This tool was designed specifically to provide a port knocking utility that allows source ports to be specified as part of the port-knock operation. It was also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
+
+
+**Client-side port knocker**: The module *PortKnock-ClientUtils* provides an interface for invoking port knocks over TCP or UDP.
+
+**Server-side listener** The module *PortKnock-ServerUtils* provides an interface for creating a listening TCP or UDP server that waits for port knocks before launching one or more server-side processes.

