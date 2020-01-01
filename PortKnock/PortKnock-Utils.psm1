@@ -32,7 +32,8 @@ Function New-TcpPortKnock()
         [String]$LocalIP, 
         [int]$LocalPort,
         [String]$RemoteIp,    
-        [int]$RemotePort
+        [int]$RemotePort,
+        [String]$Data
           )
 
     Try {
@@ -40,17 +41,21 @@ Function New-TcpPortKnock()
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $TcpClient = New-Object Net.Sockets.TcpClient($LocalIPEndPoint)
         $TcpClient.Connect($RemoteIPEndPoint) 
-        if($TcpStream = $TcpClient.getStream().CanWrite)
+        if($TcpStream = $TcpClient.getStream().CanWrite -and $Data.Length -ge 0)
         {
-            # Is the remote end expecting data as part of the knock?
-            # $Bytes = [System.Text.Encoding]::Ascii.GetBytes("secret")
-            # $TcpClient.getStream().Write($Bytes,0,$Bytes.Length())
+            try {
+             $Bytes = [System.Text.Encoding]::Ascii.GetBytes($Data)
+             $TcpClient.getStream().Write($Bytes,0,$Bytes.Count)
+                }
+            catch { 
+                Write-Host $_.Exception.Message
+                  }
         }
         Write-Host “Knocked on $($RemoteIPEndPoint).”
         $TcpClient.close()
         }
     Catch {
-        Write-Host “Couldn't knock on $($RemoteIPEndPoint)”
+        Write-Host “Couldn't knock on $($RemoteIPEndPoint): $($_.Exception.Message)"
           }
 }
 
@@ -88,7 +93,8 @@ Function New-UdpPortKnock()
         [String]$LocalIP, 
         [int]$LocalPort,
         [String]$RemoteIp,    
-        [int]$RemotePort
+        [int]$RemotePort,
+        [String]$Data
           )
 
     Try {
@@ -96,13 +102,19 @@ Function New-UdpPortKnock()
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $UdpClient = New-Object Net.Sockets.Udpclient($LocalPort)
         $UdpClient.Connect($RemoteIPEndPoint)
-        # Is the remote end expecting data as part of the knock?
-        #$Bytes = [System.Text.Encoding]::Ascii.GetBytes("secret")
-        #$UdpClient.Send($bytes, $bytes.length(), $RemoteIPEndPoint)
+        if($Data.Length -ge 0)
+        {
+            try {
+                $Bytes = [System.Text.Encoding]::Ascii.GetBytes($Data)
+                $UdpClient.Send($bytes, $bytes.length(), $RemoteIPEndPoint)
+                }
+            catch{
+                Write-Host "Couldn't write data to $($RemoteIPEndPoint).  $($_.Exception.Message)"}
+        }
         Write-Host “Knocked on $($RemoteIPEndPoint).”
         $UdpClient.close()
         }
     Catch {
-        Write-Host “Couldn't knock on $($RemoteIPEndPoint)”
+        Write-Host “Couldn't knock on $($RemoteIPEndPoint): $($_.Exception.Message)"
           }
 }
