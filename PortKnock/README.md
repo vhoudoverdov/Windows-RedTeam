@@ -18,8 +18,8 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 | Operation | Description |
 | --- | --- |
-| **Invoke a TCP port knock** | Construct and initiate one or more port knocks over TCP. |
-| **Invoke a UDP port knock** | Construct and initiate one or more port knocks over UDP.|
+| **Invoke a TCP port knock** | Construct and initiate a port knock over TCP. |
+| **Invoke a UDP port knock** | Construct and initiate a port knock over UDP.|
 
 ### <a name="examples"></a>Examples
 ###### Construct a TCP Port Knock Sequence
@@ -31,7 +31,6 @@ $CommandAndControl = "10.66.0.1"
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 2137 -RemoteIp $CommandAndControl -RemotePort 8080
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4099 -RemoteIp $CommandAndControl -RemotePort 8080
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndControl -RemotePort 8080
-New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1999 -RemoteIp $CommandAndControl -RemotePort 8080
 ```
 
 
@@ -42,7 +41,7 @@ New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1999 -RemoteIp $CommandAndContr
 $CommandAndControl = "10.66.0.1"
 
 1..4 | % {
-  New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp $CommandAndControl -RemotePort 8080
+  New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp $CommandAndControl -RemotePort 8080
   Sleep 2;
 }
 ```
