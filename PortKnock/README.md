@@ -16,17 +16,18 @@ It was also designed as an educational tool for understanding advanced persisten
 Vasken Houdoverdov  - github.com/vhoudoverdov
 
 ### <a name="operations"></a>Supported Operations
+##### <a name="client-operations"></a>Client-Side Operations
 
-
-| Client-Side Operation | Description |
+| Operation | Description |
 | --- | --- |
 | **Invoke a TCP port knock** | Construct and initiate a port knock over TCP. |
 | **Invoke a UDP port knock** | Construct and initiate a port knock over UDP.|
 
+##### <a name="server-operations"></a>Server-Side Operations
 
-| Server-Side Operation | Description |
+| Operation | Description |
 | --- | --- |
-| **Create a listening TCP server** | Create a TCP server that listens for port knocks. |
+| **Create a waiting TCP server** | Create a TCP server that listens for port knocks. |
 
 ### <a name="examples"></a>Examples
 #### Invoke a TCP Port Knock Sequence
