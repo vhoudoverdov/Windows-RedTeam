@@ -17,10 +17,12 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 ### <a name="operations"></a>Supported Operations
 
+
 | Client-Side Operation | Description |
 | --- | --- |
 | **Invoke a TCP port knock** | Construct and initiate a port knock over TCP. |
 | **Invoke a UDP port knock** | Construct and initiate a port knock over UDP.|
+
 
 | Server-Side Operation | Description |
 | --- | --- |
