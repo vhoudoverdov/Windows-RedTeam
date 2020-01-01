@@ -28,23 +28,23 @@
 
 Function New-TcpPortKnock()
 {
-    param (
+    Param (
         [String]$LocalIP, 
         [int]$LocalPort,
         [String]$RemoteIp,    
         [int]$RemotePort
           )
 
-    try {
+    Try {
         $LocalIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($LocalIP),$LocalPort)
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $TcpClient = New-Object Net.Sockets.TcpClient($LocalIPEndPoint)
         $TcpClient.connect($RemoteIPEndPoint)
-        write-host “Connected.”
+        Write-Host “Successfully knocked on $($RemoteIPEndPoint).”
         $TcpClient.close()
         }
-    catch {
-        write-host “Error connecting.”
+    Catch {
+        Write-Host “Couldn't knock on $($RemoteIPEndPoint)”
           }
 }
 
@@ -78,24 +78,24 @@ Function New-TcpPortKnock()
 
 Function New-UdpPortKnock()
 {
-    param (
+    Param (
         [String]$LocalIP, 
         [int]$LocalPort,
         [String]$RemoteIp,    
         [int]$RemotePort
           )
 
-    try {
+    Try {
         $LocalIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($LocalIP),$LocalPort)
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $UdpClient = new-Object Net.Sockets.Udpclient($LocalPort)
         $UdpClient.connect($RemoteIPEndPoint)  
        # $bytes = [System.Text.Encoding]::Unicode.GetBytes("text")
        # $udpobject.Send($bytes, $bytes.length())
-        write-host “Connected.”
+        Write-Host “Successfully knocked on $($RemoteIPEndPoint).”
        $UdpClient.close()
         }
-    catch {
-        write-host “Error connecting.”
+    Catch {
+        Write-Host “Couldn't knock on $($RemoteIPEndPoint)”
           }
 }
