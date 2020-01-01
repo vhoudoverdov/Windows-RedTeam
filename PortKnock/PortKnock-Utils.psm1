@@ -24,6 +24,9 @@
 
 .EXAMPLE
     New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 443
+
+.EXAMPLE
+    New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 8443 -Data "message"
 #> 
 
 Function New-TcpPortKnock()
@@ -43,11 +46,11 @@ Function New-TcpPortKnock()
         $TcpClient.Connect($RemoteIPEndPoint) 
         if($TcpStream = $TcpClient.getStream().CanWrite -and $Data.Length -ge 0)
         {
-            try {
+            Try {
              $Bytes = [System.Text.Encoding]::Ascii.GetBytes($Data)
              $TcpClient.getStream().Write($Bytes,0,$Bytes.Count)
                 }
-            catch { 
+            Catch { 
                 Write-Host $_.Exception.Message
                   }
         }
@@ -85,6 +88,9 @@ Function New-TcpPortKnock()
 
 .EXAMPLE
     New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "8.8.8.8" -RemotePort 53
+
+.EXAMPLE
+    New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "10.66.0.2" -RemotePort 1223 -Data "message"
 #> 
 
 Function New-UdpPortKnock()
@@ -104,11 +110,11 @@ Function New-UdpPortKnock()
         $UdpClient.Connect($RemoteIPEndPoint)
         if($Data.Length -ge 0)
         {
-            try {
+            Try {
                 $Bytes = [System.Text.Encoding]::Ascii.GetBytes($Data)
                 $UdpClient.Send($bytes, $bytes.length(), $RemoteIPEndPoint)
                 }
-            catch{
+            Catch{
                 Write-Host "Couldn't write data to $($RemoteIPEndPoint).  $($_.Exception.Message)"}
         }
         Write-Host “Knocked on $($RemoteIPEndPoint).”
