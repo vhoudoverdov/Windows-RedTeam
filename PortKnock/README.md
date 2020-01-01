@@ -18,8 +18,8 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 | Operation | Description |
 | --- | --- |
-| **Invoke a TCP port knock** | Construct and initiate one or more port knocks over TCP. |
-| **Invoke a UDP port knock** | Construct and initiate one or more port knocks over UDP.|
+| **Invoke a TCP port knock** | Construct and initiate a port knock over TCP. |
+| **Invoke a UDP port knock** | Construct and initiate a port knock over UDP.|
 
 ### <a name="examples"></a>Examples
 ###### Construct a TCP Port Knock Sequence
