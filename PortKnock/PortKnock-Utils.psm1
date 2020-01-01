@@ -23,13 +23,13 @@
     This tool is also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
 
 .EXAMPLE
-    New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 443
+    Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 443
 
 .EXAMPLE
-    New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 8443 -Data "message"
+    Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "151.101.1.140" -RemotePort 8443 -Data "message"
 #> 
 
-Function New-TcpPortKnock()
+Function Invoke-TcpPortKnock()
 {
     Param (
         [String]$LocalIP, 
@@ -87,13 +87,13 @@ Function New-TcpPortKnock()
     This tool is also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
 
 .EXAMPLE
-    New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "8.8.8.8" -RemotePort 53
+    Invoke-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "8.8.8.8" -RemotePort 53
 
 .EXAMPLE
-    New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "10.66.0.2" -RemotePort 1223 -Data "message"
+    Invoke-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp "10.66.0.2" -RemotePort 1223 -Data "message"
 #> 
 
-Function New-UdpPortKnock()
+Function Invoke-UdpPortKnock()
 {
     Param (
         [String]$LocalIP, 
