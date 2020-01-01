@@ -16,11 +16,18 @@ It was also designed as an educational tool for understanding advanced persisten
 Vasken Houdoverdov  - github.com/vhoudoverdov
 
 ### <a name="operations"></a>Supported Operations
+#### <a name="client-operations"></a>Client-Side Operations
 
 | Operation | Description |
 | --- | --- |
 | **Invoke a TCP port knock** | Construct and initiate a port knock over TCP. |
 | **Invoke a UDP port knock** | Construct and initiate a port knock over UDP.|
+
+#### <a name="server-operations"></a>Server-Side Operations
+
+| Operation | Description |
+| --- | --- |
+| **Create a waiting TCP server** | Create a TCP server that listens for port knocks. |
 
 ### <a name="examples"></a>Examples
 #### Invoke a TCP Port Knock Sequence
@@ -46,6 +53,14 @@ $CommandAndControl = "10.66.0.1"
   Sleep 2;
 }
 ```
+
+#### Create a TCP Server
+```
+# Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
+
+New-TcpServer -LocalPort 1337
+```
+
 ### <a name="appendix"></a>Malware Use Cases and Further Reading
 A number of interesting malwares have utilized port knocking in combination with source port interpretation.  Two examples of this type of malware are provided here.
 
