@@ -40,7 +40,7 @@ Function New-TcpPortKnock()
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $TcpClient = New-Object Net.Sockets.TcpClient($LocalIPEndPoint)
         $TcpClient.connect($RemoteIPEndPoint)
-        Write-Host “Successfully knocked on $($RemoteIPEndPoint).”
+        Write-Host “Knocked on $($RemoteIPEndPoint).”
         $TcpClient.close()
         }
     Catch {
@@ -90,10 +90,10 @@ Function New-UdpPortKnock()
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $UdpClient = new-Object Net.Sockets.Udpclient($LocalPort)
         $UdpClient.connect($RemoteIPEndPoint)  
-       # $bytes = [System.Text.Encoding]::Unicode.GetBytes("text")
-       # $udpobject.Send($bytes, $bytes.length())
-        Write-Host “Successfully knocked on $($RemoteIPEndPoint).”
-       $UdpClient.close()
+        # $bytes = [System.Text.Encoding]::Unicode.GetBytes("somedata")
+        # $udpobject.Send($bytes, $bytes.length())
+        Write-Host “Knocked on $($RemoteIPEndPoint).”
+        $UdpClient.close()
         }
     Catch {
         Write-Host “Couldn't knock on $($RemoteIPEndPoint)”
