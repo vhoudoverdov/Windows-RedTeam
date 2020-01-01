@@ -31,7 +31,6 @@ $CommandAndControl = "10.66.0.1"
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 2137 -RemoteIp $CommandAndControl -RemotePort 8080
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4099 -RemoteIp $CommandAndControl -RemotePort 8080
 New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndControl -RemotePort 8080
-New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1999 -RemoteIp $CommandAndControl -RemotePort 8080
 ```
 
 
