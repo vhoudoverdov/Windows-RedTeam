@@ -39,7 +39,13 @@ Function New-TcpPortKnock()
         $LocalIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($LocalIP),$LocalPort)
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
         $TcpClient = New-Object Net.Sockets.TcpClient($LocalIPEndPoint)
-        $TcpClient.connect($RemoteIPEndPoint)
+        $TcpClient.Connect($RemoteIPEndPoint) 
+        if($TcpStream = $TcpClient.getStream().CanWrite)
+        {
+            # Is the remote end expecting data as part of the knock?
+            # $Bytes = [System.Text.Encoding]::Ascii.GetBytes("secret")
+            # $TcpClient.getStream().Write($Bytes,0,$Bytes.Length())
+        }
         Write-Host “Knocked on $($RemoteIPEndPoint).”
         $TcpClient.close()
         }
@@ -88,10 +94,11 @@ Function New-UdpPortKnock()
     Try {
         $LocalIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($LocalIP),$LocalPort)
         $RemoteIPEndPoint  = New-Object Net.IPEndPoint ([IPAddress]::Parse($RemoteIp),$RemotePort)
-        $UdpClient = new-Object Net.Sockets.Udpclient($LocalPort)
-        $UdpClient.connect($RemoteIPEndPoint)  
-        # $bytes = [System.Text.Encoding]::Unicode.GetBytes("somedata")
-        # $udpobject.Send($bytes, $bytes.length())
+        $UdpClient = New-Object Net.Sockets.Udpclient($LocalPort)
+        $UdpClient.Connect($RemoteIPEndPoint)
+        # Is the remote end expecting data as part of the knock?
+        #$Bytes = [System.Text.Encoding]::Ascii.GetBytes("secret")
+        #$UdpClient.Send($bytes, $bytes.length(), $RemoteIPEndPoint)
         Write-Host “Knocked on $($RemoteIPEndPoint).”
         $UdpClient.close()
         }
