@@ -31,9 +31,8 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 ### <a name="examples"></a>Examples
 #### Invoke a TCP Port Knock Sequence
+C2 Server is waiting for a sequence of three TCP knocks whose source ports are prime numbers...
 ```
-# C2 Server is waiting for a sequence of three TCP knocks whose source ports are prime numbers...
-
 $CommandAndControl = "10.66.0.1"
 
 Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 2137 -RemoteIp $CommandAndControl -RemotePort 8080
@@ -43,9 +42,8 @@ Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndCo
 
 
 #### Invoke a UDP Port Knock Sequence
+C2 Server is waiting for a sequence of four UDP knocks whose source ports are identical, and where there is a two second delay between each knock...
 ```
-# C2 Server is waiting for a sequence of four UDP knocks whose source ports are identical, and where there is a two second delay between each knock...
-
 $CommandAndControl = "10.66.0.1"
 
 1..4 | % {
@@ -55,9 +53,8 @@ $CommandAndControl = "10.66.0.1"
 ```
 
 #### Create a TCP Server
+Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
 ```
-# Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
-
 New-TcpServer -LocalPort 1337
 ```
 
