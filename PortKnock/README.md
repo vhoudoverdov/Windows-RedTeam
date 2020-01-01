@@ -41,7 +41,7 @@ New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndContr
 $CommandAndControl = "10.66.0.1"
 
 1..4 | % {
-  New-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp $CommandAndControl -RemotePort 8080
+  New-UdpPortKnock -LocalIP "10.32.0.2" -LocalPort 1337 -RemoteIp $CommandAndControl -RemotePort 8080
   Sleep 2;
 }
 ```
