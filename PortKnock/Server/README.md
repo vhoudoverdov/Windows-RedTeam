@@ -20,8 +20,7 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 ### <a name="examples"></a>Examples
 #### Create a TCP Server
+Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
 ```
-# Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
-
 New-TcpServer -LocalPort 1337
 ```
