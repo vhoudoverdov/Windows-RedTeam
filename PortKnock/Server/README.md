@@ -15,12 +15,19 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 | Operation | Description |
 | --- | --- |
-| **Create a Listening TCP Server** | Construct a TCP server on a given local port.  This server can perform one or more actions if the right knocks are observed. |
+| **Create a Listening TCP Server** | Construct a TCP server on a specified local port.  This server can perform one or more actions if the right knocks are observed. |
+| **Create a Listening UDP Server** | Construct a UDP server on a specified local port.  This server can perform one or more actions if the right knocks are observed. |
 
 
 ### <a name="examples"></a>Examples
 #### Create a TCP Server
-Create a server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
+Create a TCP server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
 ```
 New-TcpServer -LocalPort 1337
+```
+
+#### Create a UDP Server
+Create a UDP server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
+```
+New-UdpServer -LocalPort 1337
 ```
