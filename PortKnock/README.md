@@ -41,7 +41,6 @@ Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 4099 -RemoteIp $CommandAndCo
 Invoke-TcpPortKnock -LocalIP "10.32.0.2" -LocalPort 3761 -RemoteIp $CommandAndControl -RemotePort 8080
 ```
 
-
 #### Invoke a UDP Port Knock Sequence
 C2 Server is waiting for a sequence of four UDP knocks whose source ports are identical, and where there is a two second delay between each knock...
 ```
@@ -65,7 +64,7 @@ Create a UDP server that waits for port knocks.  The server-side logic dictates 
 New-UdpServer -LocalPort 1663
 ```
 
-##### <a name="appendix"></a>Malware Use Cases and Further Reading
+### <a name="appendix"></a>Malware Use Cases and Further Reading
 A number of interesting malwares have utilized port knocking in combination with source port interpretation.  Two examples of this type of malware are provided here.
 
 ##### Venom Rootkit (2017)
