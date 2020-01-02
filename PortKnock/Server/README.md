@@ -29,5 +29,5 @@ New-TcpServer -LocalPort 1337
 #### Create a UDP Server
 Create a UDP server that waits for port knocks.  The server-side logic dictates what operations occur when the right knocks are observed.
 ```
-New-UdpServer -LocalPort 1337
+New-UdpServer -LocalPort 1663
 ```
