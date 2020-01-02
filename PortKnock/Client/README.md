@@ -56,16 +56,22 @@ $CommandAndControl = "10.66.0.1"
   Sleep 2;
 }
 ```
+
 ### <a name="appendix"></a>Malware Use Cases and Further Reading
 A number of interesting malwares have utilized port knocking in combination with source port interpretation.  Two examples of this type of malware are provided here.
 
-#### Venom Rootkit (2017)
+##### Venom Rootkit (2017)
 
 [CERN - Advisory: VENOM Linux rootkit](https://security.web.cern.ch/security/venom.shtml)
 
 [UCLA - New Linux Kernel "VENOM" Rootkit in the Wild](https://www.it.ucla.edu/security/advisories/new-linux-kernel-venom-rootkit-in-the-wild)
 
-
-#### Linux Malware from Freenode Intrusion (2014)
+##### Linux Malware from Freenode Intrusion (2014)
 
 [Analysis of the Linux backdoor used in freenode IRC network intrusion](https://www.nccgroup.trust/uk/about-us/newsroom-and-events/blogs/2014/october/analysis-of-the-linux-backdoor-used-in-freenode-irc-network-compromise/)
+
+##### Umbreon Linux Rootkit (2016)
+[Pokémon-themed Umbreon Linux Rootkit Hits x86, ARM Systems](https://blog.trendmicro.com/trendlabs-security-intelligence/pokemon-themed-umbreon-linux-rootkit-hits-x86-arm-systems/?_ga=2.180041126.367598458.1505420282-1759340220.1502477046)
+
+##### Chaos Backdoor (2018)
+[Chaos: a Stolen Backdoor Rising Again](https://www.gosecure.net/blog/2018/02/14/chaos-a-stolen-backdoor-rising/)
