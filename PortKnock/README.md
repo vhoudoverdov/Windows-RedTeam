@@ -7,9 +7,7 @@
 * [Malware Use Cases and Further Reading](#appendix)
 
 ### <a name="intro"></a>Intro
-PortKnock is a PowerShell interface for performing [port knocking](https://attack.mitre.org/techniques/T1205/) operations during Windows Red Team and Pentesting engagements. It contains a client-side component that can invoke one or more port knocks, plus an optional server that waits for the knocks.  
-
-The client works with *any* server and is not limited to working with the server provided in this module.
+PortKnock is a PowerShell interface for performing [port knocking](https://attack.mitre.org/techniques/T1205/) operations during Windows Red Team and Pentesting engagements. It contains a client-side component that can invoke one or more port knocks, plus an optional server that waits for the knocks.  The client is not limited to working with the server provided in this module, and can work with any other server that is configured to listen for the right knocks.
 
 This tool was designed specifically to provide a port knocking utility that allows source ports to be specified as part of the port-knock operation.
 It was also designed as an educational tool for understanding persistence mechanisms used by threat actors and malware.
