@@ -27,7 +27,8 @@ Vasken Houdoverdov  - github.com/vhoudoverdov
 
 | Operation | Description |
 | --- | --- |
-| **Create a waiting TCP server** | Create a TCP server that listens for port knocks. |
+| **Create a listening TCP server** | Create a TCP server that listens on the specified port. |
+| **Create a listening UDP server** | Create a UDP server that listens on the specified port. |
 
 ### <a name="examples"></a>Examples
 #### Invoke a TCP Port Knock Sequence
