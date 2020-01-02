@@ -112,7 +112,7 @@ Function Invoke-UdpPortKnock()
         {
             Try {
                 $Bytes = [System.Text.Encoding]::Ascii.GetBytes($Data)
-                $UdpClient.Send($bytes, $bytes.length(), $RemoteIPEndPoint)
+                $Result = $UdpClient.Send($bytes,$bytes.length)
                 }
             Catch{
                 Write-Host "Couldn't write data to $($RemoteIPEndPoint).  $($_.Exception.Message)"}

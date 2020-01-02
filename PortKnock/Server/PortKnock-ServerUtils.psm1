@@ -52,3 +52,42 @@ Function New-TcpServer
             Write-Host $($_.Exception.Message)
               }
 }
+
+<# 
+.SYNOPSIS 
+    Provides an interface for creating a UDP server that listens on a given local port.  This UDP server can listen to one or more port knocks from the client component of this module.  
+    Designed for use during Windows Red Team and Pentesting engagements.
+    It was also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
+
+.AUTHOR
+    Vasken Houdoverdov
+    github.com/vhoudoverdov
+
+.DESCRIPTION 
+    Provides an interface for creating a UDP server that listens on a given local port.  This UDP server can listen to one or more port knocks from the client component of this module.  
+    Designed for use during Windows Red Team and Pentesting engagements.
+    It was also designed as an educational tool for understanding advanced persistance mechanisms used by threat actors and malware.
+
+
+.EXAMPLE
+    New-UdpServer -LocalPort 1337
+#> 
+
+Function New-UdpServer 
+{
+    Param ( 
+        [Parameter(Mandatory=$True)]
+        [int] $LocalPort)
+        
+        $LocalAddress = New-Object System.Net.IPEndPoint ([IPAddress]::Any, $LocalPort)
+        Try {
+        While($True) {
+            $UdpClient = New-Object System.Net.Sockets.UdpClient $LocalPort
+            $content = $UdpClient.Receive([Ref]$LocalAddress)
+            $UdpClient.Close()
+                     }
+            }       
+        Catch {
+            Write-Host $($_.Exception.Message)
+              }
+}
